@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#d84b42">
+  <meta name="description" content="Wiki em português da versão modificada de Pokémon FireRed: recursos, desafios, encontros e dicas para completar tudo.">
+  <title>Wiki FireRed — Guia da sua aventura</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #263449;
+      --muted: #69788d;
+      --red: #d94b43;
+      --red-dark: #a93138;
+      --blue: #317caa;
+      --blue-deep: #245577;
+      --cream: #fffaf0;
+      --paper: #fffdf8;
+      --line: #e8ddc9;
+      --green: #3a8b69;
+      --shadow: 0 14px 36px #22344c18;
+      --pixel: "Courier New", ui-monospace, monospace;
+      --body: "Trebuchet MS", "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 86px; }
+    body {
+      margin: 0;
+      background: #f4efe4;
+      color: var(--ink);
+      font-family: var(--body);
+      line-height: 1.62;
+    }
+    a { color: var(--blue-deep); }
+    .topbar {
+      position: sticky; top: 0; z-index: 10;
+      display: flex; align-items: center; justify-content: space-between; gap: 18px;
+      min-height: 62px; padding: 10px clamp(18px, 5vw, 72px);
+      color: white; background: var(--red);
+      border-bottom: 4px solid #a83c3c;
+      box-shadow: 0 5px 15px #26344925;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; font-weight: 900; letter-spacing: .04em; }
+    .mini-ball { width: 30px; height: 30px; display: inline-block; border: 3px solid white; border-radius: 50%; background: linear-gradient(#fff 0 44%, #263449 44% 55%, #f8f2e6 55%); position: relative; box-shadow: inset 0 0 0 2px #ffffff55; }
+    .mini-ball::after { content: ""; position: absolute; left: 8px; top: 8px; width: 8px; height: 8px; border: 3px solid #263449; border-radius: 50%; background: white; }
+    .toplink { color: #fff; text-decoration: none; font-size: .9rem; font-weight: 700; opacity: .94; }
+    .hero {
+      overflow: hidden; position: relative;
+      padding: clamp(46px, 8vw, 94px) clamp(20px, 8vw, 120px) 52px;
+      color: white;
+      background: linear-gradient(128deg, #287baa 0%, #388db7 52%, #5aa3c3 100%);
+      border-bottom: 8px solid #e6bd57;
+    }
+    .hero::before, .hero::after { content: ""; position: absolute; pointer-events: none; opacity: .13; }
+    .hero::before { width: 280px; height: 280px; right: 8%; top: -120px; border: 34px solid white; border-radius: 50%; }
+    .hero::after { width: 140px; height: 140px; right: calc(8% + 70px); top: -50px; border: 15px solid white; border-radius: 50%; }
+    .hero-inner { max-width: 1080px; margin: auto; position: relative; z-index: 1; }
+    .eyebrow { margin: 0 0 12px; font-family: var(--pixel); font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: #ffdf83; }
+    h1 { max-width: 760px; margin: 0; font-size: clamp(2.25rem, 6vw, 4.3rem); line-height: 1.05; letter-spacing: -.04em; }
+    .hero p.lead { max-width: 660px; margin: 19px 0 28px; font-size: clamp(1rem, 2vw, 1.2rem); color: #edf8ff; }
+    .searchbox { display: flex; align-items: center; gap: 10px; max-width: 680px; padding: 8px 9px 8px 18px; background: white; border: 3px solid #d6e9f2; border-radius: 14px; box-shadow: 0 7px 0 #1f5b7b66; }
+    .searchbox .glass { color: var(--blue); font-size: 1.25rem; }
+    .searchbox input { min-width: 0; flex: 1; border: 0; outline: 0; padding: 8px 2px; color: var(--ink); font: 600 1rem var(--body); }
+    .searchbox button { border: 0; border-radius: 9px; background: var(--red); color: white; padding: 10px 15px; font: 800 .9rem var(--body); cursor: pointer; }
+    .searchbox button:hover { background: var(--red-dark); }
+    #searchStatus { min-height: 24px; margin: 10px 0 0 4px; color: #eaf6fd; font-size: .88rem; }
+    .layout { max-width: 1240px; margin: 0 auto; padding: 34px 22px 70px; display: grid; grid-template-columns: 245px minmax(0, 1fr); gap: 28px; align-items: start; }
+    aside { position: sticky; top: 86px; }
+    .navcard, .quick-card { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); overflow: hidden; }
+    .navtitle { padding: 13px 16px; color: white; background: var(--blue-deep); font: 800 .78rem var(--pixel); letter-spacing: .05em; }
+    .navlist { padding: 8px; display: grid; gap: 3px; }
+    .navlist a { display: block; padding: 8px 10px; border-radius: 8px; color: var(--ink); text-decoration: none; font-size: .92rem; font-weight: 700; }
+    .navlist a:hover { background: #f8e9df; color: var(--red-dark); }
+    .quick-card { margin-top: 14px; padding: 16px; }
+    .quick-card strong { display: block; margin-bottom: 5px; color: var(--red-dark); }
+    .quick-card p { margin: 0; color: var(--muted); font-size: .9rem; }
+    main { min-width: 0; }
+    .intro { margin: 0 0 23px; padding: 22px 24px; background: #fff8df; border: 1px solid #edd899; border-left: 6px solid #e2b742; border-radius: 12px; }
+    .intro p { margin: 0; }
+    .section-title { margin: 36px 0 14px; display: flex; align-items: center; gap: 10px; font-size: 1.55rem; line-height: 1.2; }
+    .section-title::before { content: ""; width: 12px; height: 25px; border-radius: 3px; background: var(--red); box-shadow: 5px 0 var(--blue); margin-right: 3px; }
+    .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px; }
+    article.card { scroll-margin-top: 92px; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 6px 20px #2634490d; overflow: hidden; transition: transform .18s ease, box-shadow .18s ease; }
+    article.card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+    .cardhead { padding: 15px 17px 12px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 11px; }
+    .icon { width: 38px; height: 38px; flex: 0 0 38px; display: grid; place-items: center; border-radius: 10px; color: white; background: var(--blue); font-size: 1.1rem; }
+    .card:nth-child(2n) .icon { background: var(--red); }
+    .card h3 { margin: 0; font-size: 1.12rem; line-height: 1.25; }
+    .cardbody { padding: 14px 18px 18px; }
+    .cardbody p { margin: 0 0 10px; color: #46556b; }
+    .cardbody p:last-child { margin-bottom: 0; }
+    .cardbody ul, .cardbody ol { margin: 8px 0 0; padding-left: 20px; color: #46556b; }
+    .cardbody li + li { margin-top: 5px; }
+    .tag { display: inline-block; padding: 3px 8px; border-radius: 999px; background: #e9f4f8; color: #286a8d; font-size: .75rem; font-weight: 800; letter-spacing: .03em; }
+    .callout { margin-top: 12px !important; padding: 10px 12px; border-radius: 9px; background: #eff7ef; border-left: 4px solid var(--green); color: #315d49 !important; }
+    .wide { grid-column: 1 / -1; }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; margin-top: 12px; }
+    table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+    th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--line); }
+    th { background: #f0f6f8; color: var(--blue-deep); font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; }
+    tr:last-child td { border-bottom: 0; }
+    kbd { display: inline-block; padding: 2px 7px; border: 1px solid #c9d1da; border-bottom-width: 3px; border-radius: 5px; background: #fff; color: var(--ink); font: 700 .8rem var(--pixel); }
+    .steps { counter-reset: step; list-style: none; padding: 0 !important; }
+    .steps li { position: relative; padding: 0 0 0 42px; min-height: 32px; }
+    .steps li::before { counter-increment: step; content: counter(step); position: absolute; left: 0; top: 0; width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: #e7f2f7; color: var(--blue-deep); font-weight: 900; }
+    .empty { display: none; padding: 28px; text-align: center; color: var(--muted); background: var(--paper); border: 1px dashed #c9c1b3; border-radius: 12px; }
+    .hidden-by-search { display: none !important; }
+    footer { padding: 25px 20px; background: #263449; color: #dfe7ef; text-align: center; font-size: .9rem; }
+    footer p { margin: 4px 0; }
+    footer small { color: #b8c4d1; }
+    @media (max-width: 850px) {
+      .layout { grid-template-columns: 1fr; }
+      aside { position: static; }
+      .navlist { display: flex; overflow-x: auto; }
+      .navlist a { white-space: nowrap; }
+      .quick-card { display: none; }
+    }
+    @media (max-width: 590px) {
+      .topbar { padding-inline: 15px; }
+      .toplink { display: none; }
+      .hero { padding-inline: 20px; }
+      .searchbox { flex-wrap: wrap; }
+      .searchbox input { flex-basis: calc(100% - 54px); }
+      .searchbox button { width: 100%; }
+      .layout { padding: 22px 14px 48px; }
+      .cards { grid-template-columns: 1fr; }
+      .wide { grid-column: auto; }
+      .section-title { font-size: 1.35rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#inicio"><span class="mini-ball" aria-hidden="true"></span><span>GUIA FIRE RED</span></a>
+    <a class="toplink" href="#desafios">Ir para os desafios ↓</a>
+  </header>
+  <section class="hero" id="inicio">
+    <div class="hero-inner">
+      <p class="eyebrow">KANTO · ILHAS SEVII · GUIA DA VERSÃO MODIFICADA</p>
+      <h1>Sua aventura,<br>com tudo explicado.</h1>
+      <p class="lead">Uma wiki feita para esta versão de FireRed. Pesquise recursos, evoluções, missões e caminhos para completar todos os desafios.</p>
+      <label class="searchbox" for="wikiSearch">
+        <span class="glass" aria-hidden="true">⌕</span>
+        <input id="wikiSearch" type="search" placeholder="Pesquise: EXP ALL, Mew, trocas, itens..." autocomplete="off" aria-label="Pesquisar na wiki">
+        <button id="clearSearch" type="button">Limpar</button>
+      </label>
+      <p id="searchStatus" aria-live="polite">Veja todos os guias abaixo ou digite para filtrar.</p>
+    </div>
+  </section>
+
+  <div class="layout">
+        <aside>
+      <nav class="navcard" aria-label="Navegacao da wiki">
+        <div class="navtitle">NAVEGAÇÃO</div>
+        <div class="navlist">
+          <a href="#novidades">Novidades</a>
+          <a href="#recursos">Recursos</a>
+          <a href="#desafios">Desafios 100%</a>
+          <a href="#pokémon">Pokémon e evoluções</a>
+          <a href="#missões">Missões e recompensas</a>
+          <a href="#dicas">Dicas de jogo</a>
+        </div>
+      </nav>
+      <div class="quick-card">
+        <strong>Guia da sua ROM</strong>
+        <p>Os passos desta página descrevem os recursos adicionados a esta versão. O painel de Desafios acompanha a partida salva.</p>
+      </div>
+    </aside>
+
+    <main id="wikiContent">
+        <div class="intro"><p><strong>Bem-vindo!</strong> Esta página é um guia local e funciona sem internet. Use a busca para encontrar uma função ou objetivo; os cartões que combinarem com a pesquisa ficam visíveis automaticamente.</p></div>
+
+      <h2 class="section-title" id="novidades">O que há nesta versão</h2>
+      <div class="cards">
+        <article class="card" data-search="exp all experiência experiência grupo equipe opção ligado ativar desligar batalha">
+          <div class="cardhead"><span class="icon">✦</span><h3>EXP ALL</h3></div>
+          <div class="cardbody">
+            <p>O EXP ALL distribui experiência ao grupo todo: quem participou recebe a parte normal e os outros Pokémon aptos recebem parte da experiência.</p>
+            <ol class="steps"><li>Abra o menu <strong>START</strong>.</li><li>Entre em <strong>OPÇÕES</strong>.</li><li>Vá até <strong>EXP ALL</strong> e mude para <strong>ON</strong> ou <strong>OFF</strong>.</li></ol>
+            <p class="callout"><strong>Começa ligado</strong> em um jogo novo. O ajuste fica salvo na sua partida.</p>
+          </div>
+        </article>
+        <article class="card" data-search="pokémon seguindo seguidor inicial starter caminhada mapa interiores interiores desligar opções party equipe">
+          <div class="cardhead"><span class="icon">🐾</span><h3>Pokémon seguindo você</h3></div>
+          <div class="cardbody">
+            <p>Um Pokémon da família dos iniciais acompanha o personagem pelo mapa. O jogo procura essa família em qualquer posição do grupo.</p>
+            <ol class="steps"><li>Deixe Bulbasaur, Ivysaur, Venusaur, Charmander, Charmeleon, Charizard, Squirtle, Wartortle ou Blastoise no grupo.</li><li>Para ocultar ou mostrar, abra <strong>START → OPÇÕES → FOLLOWER</strong>.</li></ol>
+            <p class="callout">Começa ativado. Se não houver um desses Pokémon no grupo, o seguidor não aparece. Em algumas situações especiais do jogo, ele pode ficar oculto temporariamente.</p>
+          </div>
+        </article>
+        <article class="card" data-search="menu desafios challenges painel conclusão progresso páginas pokémon capturados pokédex">
+          <div class="cardhead"><span class="icon">▤</span><h3>Painel de Desafios</h3></div>
+          <div class="cardbody">
+            <p>No menu <strong>START → DESAFIOS</strong>, acompanhe o progresso real da partida. O painel tem dez páginas com Pokédex, insígnias, pesquisa, missões, trocas, treinadores, itens, exploração e outros objetivos.</p>
+            <p>Use <kbd>←</kbd> e <kbd>→</kbd> para trocar de página; em Treinadores e Exploração, use <kbd>↑</kbd> e <kbd>↓</kbd> para percorrer a lista. Aperte <kbd>B</kbd> para voltar.</p>
+            <p class="callout">O total de desafios inclui objetivos de várias categorias. Capturas, itens e áreas visitadas dependem da sua partida.</p>
+          </div>
+        </article>
+        <article class="card" data-search="pokémon exclusivos leafgreen sandshrew vulpix bellsprout slowpoke staryu pinsir magmar captura selvagem local">
+          <div class="cardhead"><span class="icon">⌖</span><h3>Exclusivos em encontros selvagens</h3></div>
+          <div class="cardbody">
+            <p>Estes Pokémon agora podem ser encontrados naturalmente em áreas apropriadas. Explore a grama, a caverna, a Safari Zone ou use a vara de pesca conforme o local.</p>
+            <div class="table-wrap"><table><thead><tr><th>Pokémon</th><th>Onde procurar</th></tr></thead><tbody>
+              <tr><td>Sandshrew</td><td>Mt. Moon</td></tr><tr><td>Bellsprout</td><td>Rota 5</td></tr><tr><td>Vulpix</td><td>Rota 7</td></tr><tr><td>Pinsir</td><td>Safari Zone</td></tr><tr><td>Slowpoke</td><td>Água da Safari Zone</td></tr><tr><td>Staryu</td><td>Pescando em Cinnabar</td></tr><tr><td>Magmar</td><td>Mansão Pokémon</td></tr>
+            </tbody></table></div>
+            <p class="callout">A disponibilidade pode variar conforme a versão da tabela selvagem e o progresso. Tente diferentes áreas e varas quando necessário.</p>
+          </div>
+        </article>
+      </div>
+
+      <h2 class="section-title" id="recursos">Como usar os recursos</h2>
+      <div class="cards">
+        <article class="card" data-search="iniciar novo jogo save salvar carregar partida emulador controle bateria">
+          <div class="cardhead"><span class="icon">▣</span><h3>Começar e salvar</h3></div>
+          <div class="cardbody">
+            <p>Inicie uma partida normalmente pelo menu principal. O painel de Desafios lê os dados dessa partida, então os contadores começam baixos em um save novo.</p>
+            <ul><li>Salve pelo menu do jogo com <strong>SALVAR</strong>.</li><li>Use sempre a mesma ROM e o mesmo arquivo de save.</li><li>Se trocar de emulador ou mover a ROM, copie também o arquivo de save associado.</li></ul>
+          </div>
+        </article>
+        <article class="card" data-search="exp all batalha experiência ovos level desligar itens share">
+          <div class="cardhead"><span class="icon">↗</span><h3>Como funciona a experiência</h3></div>
+          <div class="cardbody">
+            <p>Com EXP ALL ligado, Pokémon aptos do grupo recebem experiência depois das batalhas. O Pokémon que entrou na luta recebe a parcela completa; os demais recebem uma parcela menor.</p>
+            <p>O recurso pode ser desligado a qualquer momento em <strong>START → OPÇÕES</strong>. Se estiver desligado, a distribuição volta ao comportamento clássico, com o item EXP SHARE funcionando separadamente.</p>
+          </div>
+        </article>
+        <article class="card" data-search="família inicial starter seguidor bulbasaur ivysaur venusaur charmander charmeleon charizard squirtle wartortle blastoise">
+          <div class="cardhead"><span class="icon">♡</span><h3>Quais Pokémon podem seguir</h3></div>
+          <div class="cardbody">
+            <p>O sistema inclui as três famílias iniciais de Kanto. Ele procura o primeiro membro compatível no grupo, mesmo que não esteja no primeiro espaço.</p>
+            <p>Exemplo: se o inicial estiver no sexto espaço, ele ainda pode aparecer. Um Pokémon de outra espécie na primeira posição não impede o seguidor.</p>
+          </div>
+        </article>
+        <article class="card" data-search="evolução troca nível 40 item metal coat kings rock dragon scale deep sea tooth claw link">
+          <div class="cardhead"><span class="icon">⟳</span><h3>Evoluções sem troca</h3></div>
+          <div class="cardbody">
+            <p>As evoluções que normalmente exigiriam troca agora podem ser feitas em uma partida solo:</p>
+            <ul><li>Kadabra, Machoke, Graveler e Haunter: evoluem ao atingir o <strong>nível 40</strong>.</li><li>Scyther, Onix, Seadra, Poliwhirl e Clamperl: evoluem ao atingir o <strong>nível 40 segurando o item de evolução correspondente</strong>.</li></ul>
+            <p>Os itens continuam necessários para os casos que dependem de objeto. A mudanca remove a necessidade de conectar duas partidas.</p>
+          </div>
+        </article>
+      </div>
+
+      <h2 class="section-title" id="desafios">Roteiro para completar 100%</h2>
+      <div class="cards">
+        <article class="card wide" data-search="desafios 100 porcento porcentagem 806 objetivos páginas painel geral progresso contadores">
+          <div class="cardhead"><span class="icon">★</span><h3>O que o painel acompanha</h3></div>
+          <div class="cardbody">
+            <p>Abra <strong>START → DESAFIOS</strong>. A página inicial resume as categorias; as setas esquerda e direita percorrem as dez páginas. Os objetivos são atualizados usando os dados da partida.</p>
+            <div class="table-wrap"><table><thead><tr><th>Página</th><th>O que fazer</th><th>Como avançar</th></tr></thead><tbody>
+              <tr><td>Visão geral</td><td>Resumo da conclusão</td><td>Consulte as outras páginas para ver o que falta.</td></tr>
+              <tr><td>Pokédex</td><td>Capturar os 151 Pokémon de Kanto</td><td>Veja o próximo Pokémon ausente e as dicas de local/evolução.</td></tr>
+              <tr><td>Insígnias</td><td>Vencer os oito líderes de ginásio</td><td>Confira a lista de insígnias pendentes.</td></tr>
+              <tr><td>Pesquisa</td><td>Desbloquear os avanços ligados a Oak e Sevii</td><td>Explore as ilhas e conclua a história pós-jogo.</td></tr>
+              <tr><td>Missões</td><td>Concluir 16 missões e atividades secundárias</td><td>Ajude personagens, explore as ilhas e confira lojas e tutores.</td></tr>
+              <tr><td>Trocas</td><td>Fazer as nove trocas dentro do jogo</td><td>Procure os NPCs que oferecem trocas nas cidades e rotas.</td></tr>
+              <tr><td>Treinadores</td><td>Vencer os 253 treinadores registrados</td><td>Use cima/baixo para percorrer a lista de batalhas.</td></tr>
+              <tr><td>Itens</td><td>Recolher os itens escondidos e as Poké Bolas de item</td><td>Inspecione cantos, rochas, casas, cavernas e rotas.</td></tr>
+              <tr><td>Exploração</td><td>Visitar os 51 locais marcados</td><td>Use cima/baixo para ver as áreas ainda não visitadas.</td></tr>
+              <tr><td>Outros</td><td>Vencer a Elite 4 e registrar os lendários</td><td>Explore Kanto, Sevii, ilhas de evento e Cerulean Cave.</td></tr>
+            </tbody></table></div>
+          </div>
+        </article>
+        <article class="card" data-search="pokédex pokédex 151 capturar visto capturado encontrar próximo evoluir mapa">
+          <div class="cardhead"><span class="icon">◉</span><h3>Fechar a Pokédex de Kanto</h3></div>
+          <div class="cardbody">
+            <ol class="steps"><li>Abra a página Pokédex no painel para ver capturados, avistados e o próximo que falta.</li><li>Se aparecer uma dica de nível, treine até aquele nível; se pedir item, equipe o item antes de evoluir.</li><li>Procure espécies selvagens no mapa indicado pela Pokédex e fale com personagens que entregam Pokémon.</li><li>Depois da história principal, conclua a pesquisa das Ilhas Sevii e as missões de evento disponíveis nesta ROM.</li></ol>
+            <p class="callout">Para evoluções por amizade, mantenha o Pokémon no grupo e aumente a amizade; algumas também dependem do período do dia.</p>
+          </div>
+        </article>
+        <article class="card" data-search="insígnias lider ginásio elite quatro elite 4 derrotar história batalha">
+          <div class="cardhead"><span class="icon">♜</span><h3>Insígnias e Elite 4</h3></div>
+          <div class="cardbody">
+            <p>Vença os oito ginásios de Kanto e avance pela história até a Liga Pokémon. A página de Insígnias marca cada vitória.</p>
+            <p>Derrote a Elite 4 para marcar a conclusão da história principal. Depois, volte a explorar: vários objetivos de pesquisa, lendários e Sevii dependem do pós-jogo.</p>
+          </div>
+        </article>
+        <article class="card" data-search="itens escondidos item balls bola item 122 178 restante detector itens colecionaveis">
+          <div class="cardhead"><span class="icon">✧</span><h3>Encontrar todos os itens</h3></div>
+          <div class="cardbody">
+            <p>A página de itens separa itens escondidos e itens visíveis no chão, e mostra quantos ainda faltam para o total acompanhado.</p>
+            <ul><li>Volte a locais antigos quando receber habilidades ou itens de campo.</li><li>Use o Itemfinder perto de pontos suspeitos.</li><li>Explore todas as salas, andares e caminhos opcionais.</li></ul>
+            <p class="callout">O contador distingue tipos de coleta; confira os dois números antes de concluir que uma área foi limpa.</p>
+          </div>
+        </article>
+        <article class="card" data-search="treinadores 253 batalha revanche lista sim não derrotados explorar rotas">
+          <div class="cardhead"><span class="icon">⚔</span><h3>Treinadores e rematches</h3></div>
+          <div class="cardbody">
+            <p>O painel registra os treinadores definidos para esse objetivo. Percorra a lista com cima e baixo; o estado indica quem já foi vencido.</p>
+            <p>Converse com treinadores que pedem revanche e revisite rotas e ilhas. Nem todo treinador e obrigatório para a história, mas batalhas opcionais podem contar para a conclusão.</p>
+          </div>
+        </article>
+      </div>
+
+      <h2 class="section-title" id="pokémon">Pokémon e evoluções</h2>
+      <div class="cards">
+        <article class="card" data-search="kadabra machoke graveler haunter nível 40 alakazam machamp golem gengar evolução troca">
+          <div class="cardhead"><span class="icon">⬆</span><h3>Evolução por nível</h3></div>
+          <div class="cardbody"><p>Suba o Pokémon ao nível indicado; não é preciso trocar:</p><ul><li>Kadabra → Alakazam: nível 40</li><li>Machoke → Machamp: nível 40</li><li>Graveler → Golem: nível 40</li><li>Haunter → Gengar: nível 40</li></ul></div>
+        </article>
+        <article class="card" data-search="scyther onix seadra poliwhirl clamperl item segurando evolução nível 40 metal coat kings rock dragon scale">
+          <div class="cardhead"><span class="icon">◇</span><h3>Evolução por nível e item</h3></div>
+          <div class="cardbody"><p>Equipe o item certo e alcance o nível 40:</p><ul><li>Scyther + Metal Coat → Scizor</li><li>Onix + Metal Coat → Steelix</li><li>Seadra + Dragon Scale → Kingdra</li><li>Poliwhirl + King's Rock → Politoed</li><li>Clamperl + Deep Sea Tooth/Scale → Huntail/Gorebyss</li></ul></div>
+        </article>
+        <article class="card" data-search="outros itens pedra amizade nível evoluções originais pokémon">
+          <div class="cardhead"><span class="icon">➜</span><h3>Outras evoluções</h3></div>
+          <div class="cardbody"><p>As outras evoluções seguem seus métodos habituais: nível, pedra evolutiva, amizade ou condição específica. Consulte a dica do Pokémon ausente na página da Pokédex para identificar o requisito quando ele for reconhecido pelo painel.</p></div>
+        </article>
+        <article class="card" data-search="captura selvagem leafgreen sandshrew vulpix bellsprout slowpoke staryu pinsir magmar locais mapa">
+          <div class="cardhead"><span class="icon">⌖</span><h3>Locais dos exclusivos</h3></div>
+          <div class="cardbody"><p>Use esta lista como roteiro; a busca da wiki encontra cada espécie rapidamente:</p><ul><li>Mt. Moon: Sandshrew.</li><li>Rota 5: Bellsprout.</li><li>Rota 7: Vulpix.</li><li>Safari Zone: Pinsir na grama e Slowpoke na água.</li><li>Cinnabar: Staryu com vara de pesca.</li><li>Mansão Pokémon: Magmar.</li></ul></div>
+        </article>
+      </div>
+
+      <h2 class="section-title" id="missões">Missões e recompensas</h2>
+      <div class="cards">
+        <article class="card" data-search="missões secundárias side quest lostelle lostelle armazem warehouse lorelei togepi berry pouch berry pouch lojas fama fame checker powder jar cape tutors braille sevii fóssil mew">
+          <div class="cardhead"><span class="icon">☷</span><h3>Lista de atividades acompanhadas</h3></div>
+          <div class="cardbody">
+            <p>O painel contabiliza 16 atividades. Procure as pessoas envolvidas e conclua a sequência quando uma missão tiver várias etapas.</p>
+            <ul><li>Resgate de Lostelle e eventos do Armazém Rocket.</li><li>Ajuda a Lorelei e o ovo de Togepi.</li><li>Bolsa de frutas, lojas da Ilha Dois e Pote de Pó.</li><li>Fama, tutores do Cabo, inscrições em braile e desvios em Sevii.</li><li>Pepita do túnel, fóssil e pesquisa do Mew.</li></ul>
+            <p class="callout">Algumas atividades só ficam disponíveis após avançar a história ou liberar novas Ilhas Sevii.</p>
+          </div>
+        </article>
+        <article class="card" data-search="pesquisadora solo pesquisadora um ilha tickets aurora mystic presentes pesquisador pokémon inicial hitmonlee hitmonchan eevee omanyte kabuto aerodactyl pos jogo">
+          <div class="cardhead"><span class="icon">⚑</span><h3>Pesquisadora da Ilha Um</h3></div>
+          <div class="cardbody">
+            <p>Depois de vencer a Elite 4, converse com a pesquisadora no Centro Pokémon da Ilha Um. Ela entrega os tickets de evento e oferece alguns Pokémon de recompensa em etapas.</p>
+            <ul><li>As recompensas incluem os iniciais, Hitmonlee e Hitmonchan, Eevee adicionais e as escolhas de fóssil.</li><li>Há espaço para escolher as duas linhas de fóssil ao longo da sequência.</li><li>Os antigos exclusivos de LeafGreen não são mais presentes: procure-os nos locais selvagens acima.</li></ul>
+            <p class="callout">Se a mochila ou o grupo estiverem cheios, libere espaço antes de pedir o próximo Pokémon.</p>
+          </div>
+        </article>
+        <article class="card" data-search="mew deoxys birth island ilha nascimento aurora ticket evento pos jogo captura luta pesquisa">
+          <div class="cardhead"><span class="icon">✦</span><h3>Mew e Ilha do Nascimento</h3></div>
+          <div class="cardbody">
+            <p>O desafio especial do Mew fica na Ilha do Nascimento e está ligado ao evento de Deoxys nesta versão.</p>
+            <ol class="steps"><li>Conclua a Liga Pokémon e avance a pesquisa da Ilha Um.</li><li>Obtenha o Aurora Ticket e libere a viagem para a Ilha do Nascimento.</li><li>Resolva o evento de Deoxys primeiro.</li><li>Volte a explorar a ilha e procure a nova pista da pesquisa do Mew.</li></ol>
+            <p class="callout">Salve antes de começar um encontro lendário para poder tentar novamente se necessário.</p>
+          </div>
+        </article>
+        <article class="card" data-search="lendários articuno zapdos moltres mewtwo deoxys lugia ho-oh mew elite captura desafio outros">
+          <div class="cardhead"><span class="icon">☆</span><h3>Desafios com lendários</h3></div>
+          <div class="cardbody"><p>A página <strong>Outros Desafios</strong> lista a Elite 4 e os oito lendários acompanhados: Articuno, Zapdos, Moltres, Mewtwo, Deoxys, Lugia, Ho-Oh e Mew. Procure cada um nas suas áreas especiais e confira no painel quais já foram registrados.</p></div>
+        </article>
+      </div>
+
+      <h2 class="section-title" id="dicas">Dicas para sua jornada</h2>
+      <div class="cards">
+        <article class="card" data-search="checklist rota mapa 100 porcento voltar locais pokémon centro explorar desafio">
+          <div class="cardhead"><span class="icon">✓</span><h3>Uma boa rotina de exploração</h3></div>
+          <div class="cardbody"><ol class="steps"><li>Ao chegar a uma rota nova, procure itens visíveis e escondidos.</li><li>Fale com todos os NPCs e anote pedidos de troca, missão ou revanche.</li><li>Marque no painel se a área foi registrada como visitada.</li><li>Quando liberar uma nova habilidade ou ilha, revisite os pontos anteriores.</li><li>Confira a página de desafios antes e depois de cada etapa importante.</li></ol></div>
+        </article>
+        <article class="card" data-search="busca pesquisa barra procurar comandos limpar teclado acessibilidade offline">
+          <div class="cardhead"><span class="icon">⌕</span><h3>Como pesquisar nesta wiki</h3></div>
+          <div class="cardbody"><p>Digite um nome, recurso ou local na barra do topo. A wiki filtra os guias enquanto você escreve; por exemplo: <strong>Vulpix</strong>, <strong>EXP ALL</strong>, <strong>nível 40</strong>, <strong>Mew</strong> ou <strong>itens escondidos</strong>.</p><p>O botão <strong>Limpar</strong> mostra todos os guias de novo. Esta página também pode ser aberta offline no navegador.</p></div>
+        </article>
+      </div>
+      <div class="empty" id="noResults">Nenhum guia encontrado. Tente outra palavra, como “Pokédex”, “ilha” ou “evolução”.</div>
+    </main>
+  </div>
+  <footer>
+    <p><strong>Wiki FireRed — guia da versão modificada</strong></p>
+    <small>Projeto de fã, independente e sem afiliação oficial. Os nomes de Pokémon permanecem como no jogo.</small>
+  </footer>
+  <script>
+    (() => {
+      const input = document.getElementById('wikiSearch');
+      const clear = document.getElementById('clearSearch');
+      const cards = [...document.querySelectorAll('article.card')];
+      const sections = [...document.querySelectorAll('main > .section-title')];
+      const status = document.getElementById('searchStatus');
+      const empty = document.getElementById('noResults');
+      const normalize = value => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('pt-BR').trim();
+      function filter() {
+        const query = normalize(input.value);
+        let visible = 0;
+        cards.forEach(card => {
+          const haystack = normalize(card.innerText + ' ' + (card.dataset.search || ''));
+          const match = !query || haystack.includes(query);
+          card.classList.toggle('hidden-by-search', !match);
+          if (match) visible++;
+        });
+        sections.forEach(section => {
+          const container = section.nextElementSibling;
+          const hasVisible = container && container.querySelector('article.card:not(.hidden-by-search)');
+          section.classList.toggle('hidden-by-search', !!query && !hasVisible);
+        });
+        empty.style.display = visible ? 'none' : 'block';
+        status.textContent = query ? `${visible} guia(s) encontrado(s) para “${input.value.trim()}”.` : 'Veja todos os guias abaixo ou digite para filtrar.';
+      }
+      input.addEventListener('input', filter);
+      clear.addEventListener('click', () => { input.value = ''; filter(); input.focus(); });
+      document.addEventListener('keydown', event => {
+        if (event.key === '/' && document.activeElement !== input && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+          event.preventDefault(); input.focus();
+        }
+        if (event.key === 'Escape' && document.activeElement === input) { input.value = ''; filter(); input.blur(); }
+      });
+    })();
+  </script>
+</body>
+</html>
